@@ -27,12 +27,27 @@ class Palette extends Component {
 
     return (
       <div className='Palette'>
-        <Slider defaultValue={level}
-        min={100}
-        max={900}
-        step={100}
-        onChange={this.changeLevel}
-        />
+
+        <div className='slider'>
+          <Slider defaultValue={level}
+          min={100}
+          max={900}
+          step={100}
+          onChange={this.changeLevel}
+          trackStyle={{ backgroundColor: 'transparent' }}
+          railStyle={{ height: '8px' }}
+          handleStyle={{
+            backgroundColor: 'green',
+            outline: 'none',
+            border: '2px solid green',
+            boxShadow: 'none',
+            width: '13px',
+            height: '13px',
+            marginTop: '-3px',
+          }}
+          />
+        </div>
+
         {/* Navigation */}
 
         <div className ='Palette-colors'>

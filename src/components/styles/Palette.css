@@ -8,3 +8,13 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.slider {
+  width: 340px;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.rc-slider-track {
+  background: transparent;
+}
