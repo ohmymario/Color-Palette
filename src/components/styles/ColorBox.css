@@ -4,6 +4,7 @@
   margin: 0 auto;
   position: relative;
   cursor: pointer;
+  transition: background 0.48s ease;
   /* display: inline-block; */
   /* margin-bottom: -3.5px; */
 }
