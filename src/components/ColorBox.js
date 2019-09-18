@@ -10,7 +10,6 @@ class ColorBox extends Component {
   }
 
   changeCopyState = () => {
-    console.log('Copied');
     // Show Growing Popup for 1.5 seconds
     this.setState({copied: true}, () => {
       setTimeout(() => this.setState({
