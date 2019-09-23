@@ -1,7 +1,7 @@
 .ColorBox {
   width: 20%;
   height: 25%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   position: relative;
   cursor: pointer;
   transition: background 0.48s ease;
