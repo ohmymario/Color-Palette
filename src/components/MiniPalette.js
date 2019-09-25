@@ -58,15 +58,17 @@ const MiniPalette = (props) => {
   ))
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={props.goToPalette}>
+
       <div className={classes.colors}>
-        {/* Mini Color Boxes */}
         {miniColorBoxes}
       </div>
+
       <h5 className={classes.title}>
-      {paletteName}
-      <span className={classes.emoji}>{emoji}</span>
+        {paletteName}
+        <span className={classes.emoji}>{emoji}</span>
       </h5>
+
     </div>
   );
 }
