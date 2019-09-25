@@ -6,12 +6,13 @@ import { withStyles } from '@material-ui/styles';
 const styles = {
   root: {
     backgroundColor: 'blue',
-    height: '100%',
+    height: '100vh',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
   container: {
+    // Entire Container is half of the root element
     width: '50%',
     display: 'flex',
     alignItems: 'flex-start',
@@ -25,12 +26,12 @@ const styles = {
     color: 'white'
   },
   palettes: {
-    // 3 Boxes per C
+    // 3 Boxes per Row
     boxSizing: 'border-box',
     width: '100%',
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 30%)',
-    gridGap: '5%'
+    gridGap: '5%',
   }
 }
 
@@ -41,11 +42,10 @@ class PaletteList extends Component {
 
     return (
       <div className={classes.root}>
-
         <div className={classes.container}>
           <nav className={classes.nav}>
             <h1>React Colors</h1>
-            <a href="#">Make Palette</a>
+            {/* <a href="#">Make Palette</a> */}
           </nav>
           <div className={classes.palettes}>
             {palettes.map(palette => (
@@ -53,10 +53,6 @@ class PaletteList extends Component {
             ))}
           </div>
         </div>
-
-
-
-
       </div>
     )
   }
