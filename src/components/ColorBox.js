@@ -21,7 +21,7 @@ class ColorBox extends Component {
 
   render() {
 
-    const { name, background } = this.props;
+    const { background, id, name, paletteId } = this.props;
     const { copied } = this.state;
 
     return (
@@ -32,6 +32,7 @@ class ColorBox extends Component {
 
         {/* Growing Color Alert Box*/}
         <div style={{background}} className={`copy-overlay ${copied && 'show'}`}/>
+
         <div className={`copy-message ${copied && 'show'}`}>
           <h1>Copied</h1>
           <p>{background}</p>
@@ -46,9 +47,10 @@ class ColorBox extends Component {
         </div>
 
         {/* prevent copystate and animation */}
-        <Link to='/' onClick={e => e.stopPropagation()}>
+        <Link to={`/palette/${paletteId}/${id}`} onClick={e => e.stopPropagation()}>
           <span className='see-more'>More</span>
         </Link>
+
       </div>
 
       </CopyToClipboard>
