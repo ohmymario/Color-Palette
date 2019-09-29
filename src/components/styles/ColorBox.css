@@ -9,6 +9,10 @@
   /* margin-bottom: -3.5px; */
 }
 
+.SinglePalette-colors > .ColorBox {
+  height: 50%;
+}
+
 .copy-button {
   /* Sizing */
   position: absolute;

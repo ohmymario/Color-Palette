@@ -22,3 +22,9 @@
   font-size: 1.5rem;
   margin: 0 1rem;
 }
+
+.SinglePalette-colors {
+  height: 90%;
+  display: flex;
+  flex-wrap: wrap;
+}
