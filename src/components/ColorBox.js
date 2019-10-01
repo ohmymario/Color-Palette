@@ -28,7 +28,7 @@ class ColorBox extends Component {
       <CopyToClipboard text={ background } onCopy={this.changeCopyState}>
 
       {/* Individual Color Box */}
-      <div style={{background}} className="ColorBox">
+      <div style={{background}} className='ColorBox'>
 
         {/* Growing Color Alert Box*/}
         <div style={{background}} className={`copy-overlay ${copied && 'show'}`}/>
@@ -44,12 +44,14 @@ class ColorBox extends Component {
           </div>
           <button className='copy-button'>Copy</button>
         </div>
+
       {showLink && (
         /* prevent copystate and animation */
         <Link to={`/palette/${paletteId}/${id}`} onClick={e => e.stopPropagation()}>
           <span className='see-more'>More</span>
         </Link>
       )}
+
       </div>
       </CopyToClipboard>
     )
