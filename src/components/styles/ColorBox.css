@@ -17,6 +17,14 @@
   background-color: black;
 }
 
+.ColorBox .white-text {
+  color: white;
+}
+
+.ColorBox .dark-text {
+  color: rgba(0, 0, 0, 0.8);
+}
+
 .copy-button,
 .back-button {
   /* Sizing */
