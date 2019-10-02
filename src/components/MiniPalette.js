@@ -1,50 +1,7 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
 
-const styles = {
-  root: {
-    background: 'white',
-    border: '1px solid black',
-    borderRadius: '5px',
-    padding: '0.5rem',
-    position: 'relative',
-    overflow: 'hidden',
-    '&:hover': {
-      cursor: 'pointer',
-    }
-  },
-  colors: {
-    backgroundColor: '#DAE1E4',
-    height: '150px',
-    width: '100%',
-    borderRadius: '5px',
-    overflow: 'hidden',
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  title: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    margin: '0',
-    color: 'black',
-    paddingTop: '0.5rem',
-    fontSize: '1rem',
-    position: 'relative',
-  },
-  emoji: {
-    marginLeft: '0.5rem',
-    fontSize: '1.2rem',
-  },
-  miniColor: {
-    height: 'calc(100% / 4)',
-    width: 'calc(100% / 5)',
-    position: 'relative',
-    // display: 'inline-block',
-    // margin: '0 auto',
-    // marginBottom: '-3.5px'
-  }
-}
+import styles from './styles/MiniPaletteStyles';
+import { withStyles } from '@material-ui/styles';
 
 const MiniPalette = (props) => {
 
