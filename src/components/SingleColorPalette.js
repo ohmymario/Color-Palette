@@ -3,6 +3,45 @@ import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import ColorBox from './ColorBox';
 import PaletteFooter from './PaletteFooter';
+import { withStyles } from '@material-ui/styles';
+
+const styles = {
+  Palette: {
+    height: '100vh',
+    overflow: 'hidden',
+  },
+  SinglePaletteColors: {
+    height: '90%',
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  goBack: {
+    backgroundColor: 'black',
+    width: '20%',
+    height: '50%',
+    position: 'relative',
+    cursor: 'pointer',
+    '& a': {
+      color: 'white',
+      border: 'none',
+      background: 'rgba(255, 255, 255, 0.3)',
+      position: 'absolute',
+      width: '100px',
+      height: '30px',
+      display: 'inline-block',
+      top: '50%',
+      left: '50%',
+      marginLeft: '-50px',
+      marginTop: '-15px',
+      textAlign: 'center',
+      outline: 'none',
+      fontSize: '1rem',
+      lineHeight: '30px',
+      textTransform: 'uppercase',
+      textDecoration: 'none',
+    }
+  }
+}
 
 export class SingleColorPalette extends Component {
 
@@ -37,7 +76,7 @@ export class SingleColorPalette extends Component {
 
   render() {
     const { format, shades } = this.state;
-    const { palette: {paletteName, emoji, id} } = this.props;
+    const { palette: {paletteName, emoji, id}, classes } = this.props;
 
     const colorBoxes = shades.map(color => (
       <ColorBox
@@ -49,11 +88,11 @@ export class SingleColorPalette extends Component {
     ))
 
     return (
-      <div className ='Palette'>
+      <div className={classes.Palette}>
         <Navbar changeColorFormat={this.changeColorFormat} showingAllColors={false}/>
-        <div className ='SinglePalette-colors'>
+        <div className={classes.SinglePaletteColors}>
           {colorBoxes}
-          <div className='go-back ColorBox'>
+          <div className={classes.goBack}>
             <Link
               to={`/palette/${id}`}
               className='back-button'>
@@ -67,4 +106,4 @@ export class SingleColorPalette extends Component {
   }
 }
 
-export default SingleColorPalette
+export default withStyles(styles)(SingleColorPalette);
