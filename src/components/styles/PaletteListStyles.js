@@ -15,10 +15,15 @@ export default {
     flexWrap: 'wrap',
   },
   nav: {
+    color: 'white',
     display: 'flex',
-    width: '100%',
     justifyContent: 'space-between',
-    color: 'white'
+    alignItems: 'center',
+    width: '100%',
+    '& a': {
+      textDecoration: 'none',
+      color: 'white',
+    }
   },
   palettes: {
     // 3 Boxes per Row
