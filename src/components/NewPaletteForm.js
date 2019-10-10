@@ -82,7 +82,7 @@ export class NewPaletteForm extends Component {
     open: true,
     currentColor: 'teal',
     newName: '',
-    colors: [],
+    colors: [{color: 'blue', name: 'blue'}],
   };
 
   componentDidMount = () => {
@@ -92,6 +92,7 @@ export class NewPaletteForm extends Component {
       this.state.colors.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
     ));
 
+    // Color cannot already exist
     ValidatorForm.addValidationRule('isColorUnique', (value) => (
       this.state.colors.every(({ color }) => color !== this.state.currentColor)
     ));
@@ -121,6 +122,25 @@ export class NewPaletteForm extends Component {
     this.setState({newName: e.target.value})
   }
 
+  toKebabCase = (str) => (
+    str &&
+    str
+      .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+      .map(x => x.toLowerCase())
+      .join('-')
+    )
+
+  handleSubmit = () => {
+    const newName = 'New Test Palette';
+    const newPalette = {
+      paletteName: newName,
+      id: this.toKebabCase(newName),
+      colors: this.state.colors
+    };
+    this.props.savePalette(newPalette);
+    this.props.history.push('/');
+  }
+
   render() {
     const { classes } = this.props;
     const { open, currentColor, newName } = this.state;
@@ -131,12 +151,14 @@ export class NewPaletteForm extends Component {
 
         <AppBar
           position="fixed"
+          color='default'
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open,
           })}
         >
 
           <Toolbar disableGutters={!open}>
+
             <IconButton
               color="inherit"
               aria-label="Open drawer"
@@ -145,12 +167,21 @@ export class NewPaletteForm extends Component {
             >
               <MenuIcon />
             </IconButton>
+
             <Typography
               variant="h6"
               color="inherit"
               noWrap>
               Persistent drawer
             </Typography>
+
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={this.handleSubmit}>
+              Save Palette
+            </Button>
+
           </Toolbar>
 
         </AppBar>
@@ -231,7 +262,7 @@ export class NewPaletteForm extends Component {
           <div className={classes.drawerHeader} />
 
           {this.state.colors.map((color) => (
-            <DraggableColorBox color={color.color}/>
+            <DraggableColorBox color={color.name}/>
           ))}
 
         </main>

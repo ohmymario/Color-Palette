@@ -12,10 +12,18 @@ import { generatePalette } from '../utils/colorHelpers';
 
 class App extends Component {
 
+  state = {
+    palettes: seedColors
+  }
+
   // Return palette passed into routeProps
-  findPalette = (id) => (
-    seedColors.find(palette => palette.id === id)
-  )
+  findPalette = (id) => this.state.palettes.find(palette => palette.id === id);
+
+  // Save created palette to State
+  savePalette = (palette) => {
+    this.setState({ palettes: [...this.state.palettes, palette] })
+    // console.log(`APP ${JSON.stringify(palette)}`)
+  }
 
   render() {
     return (
@@ -24,14 +32,14 @@ class App extends Component {
           exact
           path="/"
           render={(routeProps) => (
-            <PaletteList palettes={seedColors} {...routeProps}/>
+            <PaletteList palettes={this.state.palettes} {...routeProps}/>
           )}
         />
         <Route
           exact
           path="/palette/new"
           render={(routeProps) => (
-            <NewPaletteForm {...routeProps}/>
+            <NewPaletteForm savePalette={this.savePalette} {...routeProps}/>
           )}
         />
         <Route
