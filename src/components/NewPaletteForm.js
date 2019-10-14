@@ -81,13 +81,14 @@ export class NewPaletteForm extends Component {
   state = {
     open: true,
     currentColor: 'teal',
-    newName: '',
+    newColorName: '',
     colors: [{color: 'blue', name: 'blue'}],
+    newPaletteName: ''
   };
 
   componentDidMount = () => {
 
-    //Name cannot already exist
+    //Color Name cannot already exist
     ValidatorForm.addValidationRule('isColorNameUnique', (value) => (
       this.state.colors.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
     ));
@@ -95,6 +96,13 @@ export class NewPaletteForm extends Component {
     // Color cannot already exist
     ValidatorForm.addValidationRule('isColorUnique', (value) => (
       this.state.colors.every(({ color }) => color !== this.state.currentColor)
+    ));
+
+    // Palette Name cannot already exist
+    ValidatorForm.addValidationRule('isPaletteNameUnique', (value) => (
+      this.props.palettes.every(({ paletteName }) => (
+        paletteName.toLowerCase() !== this.state.newPaletteName.toLowerCase()
+      ))
     ));
   }
 
@@ -113,13 +121,14 @@ export class NewPaletteForm extends Component {
   };
 
   addNewColor = () => {
-    const { colors, currentColor, newName } = this.state;
-    const newColor = { name: newName, color: currentColor }
-    this.setState({colors: [...colors, newColor], newName: ''})
+    const { colors, currentColor, newColorName } = this.state;
+    const newColor = { name: newColorName, color: currentColor }
+    this.setState({colors: [...colors, newColor], newColorName: ''})
   }
 
   handleChange = (e) => {
-    this.setState({newName: e.target.value})
+    const { name, value } = e.target;
+    this.setState({[name]: value})
   }
 
   toKebabCase = (str) => (
@@ -128,13 +137,13 @@ export class NewPaletteForm extends Component {
       .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
       .map(x => x.toLowerCase())
       .join('-')
-    )
+  )
 
   handleSubmit = () => {
-    const newName = 'New Test Palette';
+    const newColorName = this.state.newPaletteName;
     const newPalette = {
-      paletteName: newName,
-      id: this.toKebabCase(newName),
+      paletteName: newColorName,
+      id: this.toKebabCase(newColorName),
       colors: this.state.colors
     };
     this.props.savePalette(newPalette);
@@ -143,7 +152,7 @@ export class NewPaletteForm extends Component {
 
   render() {
     const { classes } = this.props;
-    const { open, currentColor, newName } = this.state;
+    const { open, currentColor, newColorName, newPaletteName } = this.state;
 
     return (
       <div className={classes.root}>
@@ -168,19 +177,34 @@ export class NewPaletteForm extends Component {
               <MenuIcon />
             </IconButton>
 
-            <Typography
-              variant="h6"
-              color="inherit"
-              noWrap>
+            <Typography variant="h6" color="inherit" noWrap>
               Persistent drawer
             </Typography>
 
-            <Button
-              variant='contained'
-              color='primary'
-              onClick={this.handleSubmit}>
-              Save Palette
-            </Button>
+            <ValidatorForm
+              ref="form"
+              onSubmit={this.handleSubmit}
+              onError={errors => console.log(errors)}
+            >
+
+              <TextValidator
+              label="Palette Name"
+              name='newPaletteName'
+              value={newPaletteName}
+              onChange={this.handleChange}
+              validators={['required', 'isPaletteNameUnique']}
+              errorMessages={['Enter Palette Name', 'Name already taken']}
+              />
+              <Button
+                variant='contained'
+                color='primary'
+                type='submit'
+              >
+                Save Palette
+              </Button>
+
+            </ValidatorForm>
+
 
           </Toolbar>
 
@@ -232,8 +256,8 @@ export class NewPaletteForm extends Component {
           >
             <TextValidator
               label="Color Name"
-              value={newName}
-              name="Name"
+              value={newColorName}
+              name="newColorName"
               onChange={this.handleChange}
               validators={['required', 'isColorNameUnique', 'isColorUnique']}
               errorMessages={[
