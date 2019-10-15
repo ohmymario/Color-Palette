@@ -199,9 +199,7 @@ export class NewPaletteForm extends Component {
                 variant='contained'
                 color='primary'
                 type='submit'
-              >
-                Save Palette
-              </Button>
+              >Save Palette</Button>
 
             </ValidatorForm>
 
@@ -286,7 +284,7 @@ export class NewPaletteForm extends Component {
           <div className={classes.drawerHeader} />
 
           {this.state.colors.map((color) => (
-            <DraggableColorBox color={color.name}/>
+            <DraggableColorBox color={color}/>
           ))}
 
         </main>
