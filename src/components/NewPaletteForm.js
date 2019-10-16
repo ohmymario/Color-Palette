@@ -13,8 +13,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { arrayMove } from 'react-sortable-hoc';
 
-import DraggableColorBox from './DraggableColorBox';
+import DraggableColorList from './DraggableColorList';
 
 const drawerWidth = 400;
 
@@ -82,7 +83,29 @@ export class NewPaletteForm extends Component {
     open: true,
     currentColor: 'teal',
     newColorName: '',
-    colors: [{color: 'blue', name: 'blue'}],
+    // colors: [{color: 'blue', name: 'blue'}],
+    colors: [
+      { name: "FlatFlesh", color: "#fad390" },
+      { name: "MelonMelody", color: "#f8c291" },
+      { name: "Livid", color: "#6a89cc" },
+      { name: "Spray", color: "#82ccdd" },
+      { name: "ParadiseGreen", color: "#b8e994" },
+      { name: "SquashBlossom", color: "#f6b93b" },
+      { name: "MandarinRed", color: "#e55039" },
+      { name: "AzraqBlue", color: "#4a69bd" },
+      { name: "Dupain", color: "#60a3bc" },
+      { name: "AuroraGreen", color: "#78e08f" },
+      { name: "IcelandPoppy", color: "#fa983a" },
+      { name: "TomatoRed", color: "#eb2f06" },
+      { name: "YueGuangBlue", color: "#1e3799" },
+      { name: "GoodSamaritan", color: "#3c6382" },
+      { name: "Waterfall", color: "#38ada9" },
+      { name: "CarrotOrange", color: "#e58e26" },
+      { name: "JalapenoRed", color: "#b71540" },
+      { name: "DarkSapphire", color: "#0c2461" },
+      { name: "ForestBlues", color: "#0a3d62" },
+      { name: "ReefEncounter", color: "#079992" }
+    ],
     newPaletteName: ''
   };
 
@@ -156,6 +179,12 @@ export class NewPaletteForm extends Component {
       colors: newColors
     })
   }
+
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState(({ colors }) => ({
+      colors: arrayMove(colors, oldIndex, newIndex),
+    }));
+  };
 
   render() {
     const { classes } = this.props;
@@ -290,13 +319,12 @@ export class NewPaletteForm extends Component {
         >
           <div className={classes.drawerHeader} />
 
-          {this.state.colors.map((color) => (
-            <DraggableColorBox
-              key={color.name}
-              color={color}
-              handleClick={() => this.removeColor(color.name)}
-            />
-          ))}
+          <DraggableColorList
+            colors={this.state.colors}
+            removeColor={this.removeColor}
+            axis='xy'
+            onSortEnd={this.onSortEnd}
+          />
 
         </main>
       </div>
