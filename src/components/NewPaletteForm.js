@@ -125,6 +125,7 @@ export class NewPaletteForm extends Component {
     })
   };
 
+  // Add currentColor + newColorName to colors
   addNewColor = () => {
     const { colors, currentColor, newColorName } = this.state;
     const newColor = { name: newColorName, color: currentColor }
@@ -136,6 +137,7 @@ export class NewPaletteForm extends Component {
     this.setState({[name]: value})
   }
 
+  // Change input string to Kebab Case
   toKebabCase = (str) => {
     return str && str
       .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
@@ -154,12 +156,14 @@ export class NewPaletteForm extends Component {
     this.props.history.push('/');
   }
 
+  // Reset Palette
   clearColors = () => {
     this.setState({
       colors: []
     })
   }
 
+  // Add Random color from Prexisting Colors
   addRandomColors = () => {
     const allColors = this.props.palettes.map(p => p.colors).flat()
     const random = allColors[Math.floor(Math.random() * allColors.length)];
@@ -168,6 +172,7 @@ export class NewPaletteForm extends Component {
     })
   }
 
+  // Remove Individual Color
   removeColor = (colorName) => {
     const newColors = this.state.colors.filter(color => color.name !== colorName)
     this.setState({
@@ -175,6 +180,7 @@ export class NewPaletteForm extends Component {
     })
   }
 
+  // Function for react-sortable-hoc - ENABLES SORT
   onSortEnd = ({oldIndex, newIndex}) => {
     this.setState(({ colors }) => ({
       colors: arrayMove(colors, oldIndex, newIndex),
