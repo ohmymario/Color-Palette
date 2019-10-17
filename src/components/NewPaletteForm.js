@@ -79,33 +79,15 @@ const styles = theme => ({
 
 export class NewPaletteForm extends Component {
 
+  static defaultProps = {
+    maxColors: 20
+  }
+
   state = {
     open: true,
     currentColor: 'teal',
     newColorName: '',
-    // colors: [{color: 'blue', name: 'blue'}],
-    colors: [
-      { name: "FlatFlesh", color: "#fad390" },
-      { name: "MelonMelody", color: "#f8c291" },
-      { name: "Livid", color: "#6a89cc" },
-      { name: "Spray", color: "#82ccdd" },
-      { name: "ParadiseGreen", color: "#b8e994" },
-      { name: "SquashBlossom", color: "#f6b93b" },
-      { name: "MandarinRed", color: "#e55039" },
-      { name: "AzraqBlue", color: "#4a69bd" },
-      { name: "Dupain", color: "#60a3bc" },
-      { name: "AuroraGreen", color: "#78e08f" },
-      { name: "IcelandPoppy", color: "#fa983a" },
-      { name: "TomatoRed", color: "#eb2f06" },
-      { name: "YueGuangBlue", color: "#1e3799" },
-      { name: "GoodSamaritan", color: "#3c6382" },
-      { name: "Waterfall", color: "#38ada9" },
-      { name: "CarrotOrange", color: "#e58e26" },
-      { name: "JalapenoRed", color: "#b71540" },
-      { name: "DarkSapphire", color: "#0c2461" },
-      { name: "ForestBlues", color: "#0a3d62" },
-      { name: "ReefEncounter", color: "#079992" }
-    ],
+    colors: this.props.palettes[0].colors,
     newPaletteName: ''
   };
 
@@ -154,13 +136,12 @@ export class NewPaletteForm extends Component {
     this.setState({[name]: value})
   }
 
-  toKebabCase = (str) => (
-    str &&
-    str
+  toKebabCase = (str) => {
+    return str && str
       .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
       .map(x => x.toLowerCase())
       .join('-')
-  )
+  }
 
   handleSubmit = () => {
     const newColorName = this.state.newPaletteName;
@@ -171,6 +152,20 @@ export class NewPaletteForm extends Component {
     };
     this.props.savePalette(newPalette);
     this.props.history.push('/');
+  }
+
+  clearColors = () => {
+    this.setState({
+      colors: []
+    })
+  }
+
+  addRandomColors = () => {
+    const allColors = this.props.palettes.map(p => p.colors).flat()
+    const random = allColors[Math.floor(Math.random() * allColors.length)];
+    this.setState({
+      colors: [...this.state.colors, random]
+    })
   }
 
   removeColor = (colorName) => {
@@ -187,8 +182,9 @@ export class NewPaletteForm extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { open, currentColor, newColorName, newPaletteName } = this.state;
+    const { classes, maxColors } = this.props;
+    const { colors, open, currentColor, newColorName, newPaletteName } = this.state;
+    const paletteIsFull = colors.length >= maxColors;
 
     return (
       <div className={classes.root}>
@@ -263,17 +259,22 @@ export class NewPaletteForm extends Component {
 
           <Typography variant='h4' >Design Your Palette</Typography>
 
-          <div>
+          <div className={classes.drawerBtnContainer}>
             <Button
               variant='contained'
               aria-label="clear"
-              color='secondary'>
+              color='secondary'
+              onClick={this.clearColors}
+              >
               Clear Palette
             </Button>
             <Button
               variant='contained'
               aria-label="random"
-              color='primary'>
+              color='primary'
+              onClick={this.addRandomColors}
+              disabled={paletteIsFull}
+              >
               Random Color
             </Button>
           </div>
@@ -304,9 +305,10 @@ export class NewPaletteForm extends Component {
               type="submit"
               variant='contained'
               aria-label="add"
-              style={{background: currentColor}}
+              disabled={paletteIsFull}
+              style={{background: paletteIsFull ? 'grey': currentColor}}
               >
-              Add Color
+              {paletteIsFull ? 'Palette Full' : 'Add Color'}
             </Button>
           </ValidatorForm>
 
