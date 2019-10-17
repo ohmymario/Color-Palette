@@ -5,11 +5,7 @@ import DraggableColorBox from './DraggableColorBox';
 const DraggableColorList = SortableContainer((props) => {
   const { colors, removeColor } = props;
   return (
-    // need these styles
-    // height: 100%;
-    // display: flex;
-    // flex-wrap: wrap;
-    <div style={{height: '100%'}}>
+    <div style={{height: '100%', display: 'flex', flexWrap: 'wrap' }}>
       {colors.map((color, index) => (
         <DraggableColorBox
           index={index}
