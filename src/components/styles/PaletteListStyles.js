@@ -23,7 +23,7 @@ export default {
     '& a': {
       textDecoration: 'none',
       color: 'white',
-    }
+    },
   },
   palettes: {
     // 3 Boxes per Row
@@ -32,5 +32,5 @@ export default {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 30%)',
     gridGap: '5%',
-  }
-}
+  },
+};

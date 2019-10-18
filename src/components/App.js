@@ -22,7 +22,6 @@ class App extends Component {
   // Save created palette to State
   savePalette = (palette) => {
     this.setState({ palettes: [...this.state.palettes, palette] })
-    // console.log(`APP ${JSON.stringify(palette)}`)
   }
 
   render() {
