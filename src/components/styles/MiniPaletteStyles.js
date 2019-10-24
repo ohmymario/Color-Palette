@@ -17,7 +17,8 @@ export default {
     borderRadius: '5px',
     overflow: 'hidden',
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    alignContent: 'flex-start',
   },
   title: {
     display: 'flex',

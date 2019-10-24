@@ -8,6 +8,7 @@ export default {
     // height: '90%',
     display: 'flex',
     flexWrap: 'wrap',
+    alignContent: 'flex-start',
   },
   PaletteFooter: {
     backgroundColor: 'white',
