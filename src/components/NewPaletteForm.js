@@ -114,13 +114,17 @@ class NewPaletteForm extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = (newPaletteName) => {
-    const newPalette = {
-      paletteName: newPaletteName,
-      id: this.toKebabCase(newPaletteName),
-      colors: this.state.colors,
+  handleSubmit = (newPalette) => {
+    const {emoji, paletteName} = newPalette;
+    const { colors } = this.state;
+
+    const Palette = {
+      paletteName,
+      emoji,
+      colors,
+      id: this.toKebabCase(paletteName),
     };
-    this.props.savePalette(newPalette);
+    this.props.savePalette(Palette);
     this.props.history.push('/');
   };
 
