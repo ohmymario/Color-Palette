@@ -12,8 +12,19 @@ import { generatePalette } from '../utils/colorHelpers';
 
 class App extends Component {
 
+  static defaultProps = {
+    savedPalettes: JSON.parse(localStorage.getItem('palettes'))
+  }
+
   state = {
-    palettes: seedColors
+    palettes: this.props.savedPalettes || seedColors,
+  }
+
+  savedPalettes = JSON.parse(window.localStorage.getItem('palettes'))
+
+  syncLocalStorage = () => {
+    // Save Palettes to LocalStorage
+    window.localStorage.setItem('palettes', JSON.stringify(this.state.palettes))
   }
 
   // Return palette passed into routeProps
@@ -21,7 +32,7 @@ class App extends Component {
 
   // Save created palette to State
   savePalette = (palette) => {
-    this.setState({ palettes: [...this.state.palettes, palette] })
+    this.setState({palettes: [...this.state.palettes, palette]}, this.syncLocalStorage)
   }
 
   render() {

@@ -53,12 +53,13 @@ class ColorPickerForm extends Component {
     const { currentColor, newColorName } = this.state;
 
     return (
-      <div>
+      <div className={classes.palettePicker}>
         <ChromePicker
           color={currentColor}
           onChangeComplete={newColor => this.updateCurrentColor(newColor)}
           className={classes.picker}
           width='100%'
+          disableAlpha
         />
 
         <ValidatorForm

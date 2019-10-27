@@ -62,9 +62,9 @@ class NewPaletteForm extends Component {
 
     const Palette = {
       paletteName,
+      id: this.toKebabCase(paletteName),
       emoji,
       colors,
-      id: this.toKebabCase(paletteName),
     };
     this.props.savePalette(Palette);
     this.props.history.push('/');

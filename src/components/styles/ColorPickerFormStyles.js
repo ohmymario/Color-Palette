@@ -1,4 +1,7 @@
 const styles = {
+  palettePicker: {
+    width: '100%',
+  },
   picker: {
     width: '100%',
     marginTop: '2rem',
@@ -12,7 +15,7 @@ const styles = {
   colorNameInput: {
     width: '100%',
     height: '70px',
-  }
+  },
 }
 
 export default styles;
