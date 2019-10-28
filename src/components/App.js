@@ -35,6 +35,12 @@ class App extends Component {
     this.setState({palettes: [...this.state.palettes, palette]}, this.syncLocalStorage)
   }
 
+  // Delete Palette
+  deletePalette = (id) => {
+    this.setState(st => ({palettes: st.palettes.filter(palette => palette.id !== id)}), this.syncLocalStorage)
+
+  }
+
   render() {
     return (
       <Switch>
@@ -42,7 +48,7 @@ class App extends Component {
           exact
           path="/"
           render={(routeProps) => (
-            <PaletteList palettes={this.state.palettes} {...routeProps}/>
+            <PaletteList palettes={this.state.palettes} deletePalette={this.deletePalette} {...routeProps}/>
           )}
         />
         <Route
