@@ -14,11 +14,11 @@ export default {
     },
     [sizes.down('lg')]: {
       width: '25%',
-      height: props => props.showingFullPalette ? '20%': '33%',
+      height: props => props.showingFullPalette ? '20%': 'calc(100% / 3)',
     },
     [sizes.down('md')]: {
       width: '50%',
-      height: props => props.showingFullPalette ? '10%': '33%',
+      height: props => props.showingFullPalette ? '10%': '20%',
     },
     [sizes.down('xs')]: {
       width: '100%',
@@ -65,7 +65,12 @@ export default {
   boxContent: {
     position: 'absolute',
     padding: '10px',
-    width: '80%',
+
+    // Temp fix for horizontal
+    // scrollbar due to long color names
+    // width: '100%',
+    // width: '80%',
+    overflow: 'hidden',
     left: '0px',
     bottom: '0px',
     letterSpacing: '1px',
@@ -110,6 +115,9 @@ export default {
       marginBottom: '0',
       padding: '1rem',
       textTransform: 'uppercase',
+      [sizes.down('xs')]: {
+        fontSize: '6rem',
+      }
     },
     '& p': {
       fontSize: '2rem',
