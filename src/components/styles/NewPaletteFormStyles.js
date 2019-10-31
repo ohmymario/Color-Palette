@@ -23,7 +23,8 @@ const styles = theme => ({
     alignItems: 'center',
     width: '100%',
     padding: '0 8px',
-    ...theme.mixins.toolbar,
+    // ...theme.mixins.toolbar,
+    minHeight: '64px',
     justifyContent: 'flex-end',
   },
   content: {
