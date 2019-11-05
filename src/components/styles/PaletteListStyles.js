@@ -1,12 +1,23 @@
 import sizes from './sizes';
+import bg from './bg.svg';
 
 export default {
   root: {
-    backgroundColor: 'blue',
     height: '100vh',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
+    backgroundColor: '#2e49ab',
+    backgroundImage: `url(${bg})`,
+    /* background by SVGBackgrounds.com */
+    backgroundAttachment: 'auto',
+    backgroundRepeat: 'repeat',
+    backgroundPosition: 'center center',
+    overflow: 'auto',
+
+  },
+  heading:{
+    fontSize: '2rem',
   },
   container: {
     // Entire Container is half of the root element
@@ -30,7 +41,10 @@ export default {
     width: '100%',
     '& a': {
       textDecoration: 'none',
-      color: 'white',
+    },
+    '& h1, a': {
+      color: '#ffffff',
+      background: '#2e49ab',
     },
   },
   palettes: {
