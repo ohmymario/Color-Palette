@@ -8,7 +8,7 @@ export default {
       sm:'767.98px',
       md:'991.98px',
       lg:'1199.98px',
-      // XL is default CSS
+      xl: '1600.98px'
     }
     return `@media (max-width: ${sizes[size]})`
   }
