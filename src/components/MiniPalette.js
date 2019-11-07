@@ -8,9 +8,11 @@ export class MiniPalette extends Component {
   state = {}
 
   deletePalette = (e) => {
+    const {id, openDialog} = this.props;
+
     // Delete Palette function from parent palette
     e.stopPropagation()
-    this.props.deletePalette(this.props.id)
+    openDialog(id)
   }
 
   render() {
