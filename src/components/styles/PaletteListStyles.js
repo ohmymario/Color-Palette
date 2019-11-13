@@ -12,6 +12,8 @@ export default {
     }
   },
   root: {
+    fontFamily: 'Roboto',
+    boxSizing: 'border-box',
     height: '100vh',
     display: 'flex',
     alignItems: 'flex-start',
@@ -50,6 +52,7 @@ export default {
     width: '100%',
     '& a': {
       textDecoration: 'none',
+      boxSizing: 'border-box',
     },
     '& h1, a': {
       color: '#ffffff',
