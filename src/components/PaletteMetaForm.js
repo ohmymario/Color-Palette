@@ -47,6 +47,7 @@ class PaletteMetaForm extends Component {
 
     const newPalette = { emoji: emoji.native, paletteName: newPaletteName }
     handleSubmit(newPalette)
+    this.setState({ stage: '' })
   }
 
   // Open or close Dialog Form
