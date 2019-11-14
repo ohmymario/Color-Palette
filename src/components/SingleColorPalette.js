@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
+import { withStyles } from '@material-ui/styles';
+
+import styles from './styles/PaletteStyles';
 import Navbar from './Navbar';
 import ColorBox from './ColorBox';
 import PaletteFooter from './PaletteFooter';
 
-import { withStyles } from '@material-ui/styles';
-import styles from './styles/PaletteStyles';
 
 export class SingleColorPalette extends Component {
 
@@ -34,11 +36,13 @@ export class SingleColorPalette extends Component {
 
   // Run gatherShades and save to State
   componentDidMount = () => {
-    const colors = this.gatherShades(this.props.palette, this.props.colorId)
+    const { palette, colorId } = this.props;
+    const colors = this.gatherShades(palette, colorId)
     this.setState({shades: colors});
   }
 
   render() {
+
     const { format, shades } = this.state;
     const { palette: {paletteName, emoji, id}, classes } = this.props;
 

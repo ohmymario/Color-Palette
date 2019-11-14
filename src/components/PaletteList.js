@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import MiniPalette from './MiniPalette';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 import Avatar from '@material-ui/core/Avatar';
 
@@ -17,10 +17,11 @@ import CloseIcon from '@material-ui/icons/Close'
 
 import { withStyles } from '@material-ui/styles';
 import styles from './styles/PaletteListStyles';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 import blue from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/red';
+
+import MiniPalette from './MiniPalette';
 
 class PaletteList extends Component {
 
@@ -56,6 +57,7 @@ class PaletteList extends Component {
   }
 
   render() {
+
     const { classes, palettes, deletePalette } = this.props;
     const { openDeleteDialog, deletingId } = this.state;
 

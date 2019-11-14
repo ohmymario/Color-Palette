@@ -13,7 +13,6 @@ import { Picker } from 'emoji-mart';
 class PaletteMetaForm extends Component {
 
   state = {
-    // open: true,
     stage: 'form',
     newPaletteName: '',
   }
@@ -50,12 +49,9 @@ class PaletteMetaForm extends Component {
     this.setState({ stage: '' })
   }
 
-  // Open or close Dialog Form
-  // handleClickOpen = () => this.setState({ open: true });
-  // handleClose = () => this.setState({ open: false });
-
   render() {
-    const { open, newPaletteName, stage } = this.state;
+
+    const { newPaletteName, stage } = this.state;
     const { handleSubmit, palettes, hideForm } = this.props;
 
     return (
