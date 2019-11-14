@@ -29,7 +29,10 @@ export default {
     margin: '0 10px',
     display: 'inline-block',
     [sizes.down('md')]: {
-      width: '150px',
+      width: '300px',
+    },
+    [sizes.down('sm')]: {
+      width: '130px',
     }
   },
   selectContainer: {

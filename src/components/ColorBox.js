@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-
+import classNames from 'classnames';
 import { withStyles } from '@material-ui/styles';
 import styles from './styles/ColorBoxStyles';
 
@@ -30,9 +30,18 @@ class ColorBox extends Component {
       {/* Individual Color Box */}
       <div style={{background}} className={classes.ColorBox}>
 
-        {/* Growing Color Alert Box*/}
-        <div style={{background}} className={`${classes.copyOverlay} ${copied && classes.showOverlay}`}/>
-        <div className={`${classes.copyMessage} ${copied && classes.showMessage}`}>
+        {/* Growing Color Alert Box COLOR*/}
+        <div
+          style={{background}}
+          className={classNames(classes.copyOverlay, {
+            [classes.showOverlay]: copied,
+          })}
+        />
+
+        {/* Growing Color Alert Box TEXT*/}
+        <div className={classNames(classes.copyMessage, {
+          [classes.showMessage]: copied,
+        })}>
           <h1>Copied</h1>
           <p className={`${classes.textColor}`}>{background}</p>
         </div>
@@ -46,7 +55,7 @@ class ColorBox extends Component {
         </div>
 
         {showingFullPalette && (
-          /* prevent copystate and animation */
+          /* prevent copystate and animation bubbling up*/
           <Link to={`/palette/${paletteId}/${id}`} onClick={e => e.stopPropagation()}>
             <span className={`${classes.seeMore} ${classes.textColor}`}>More</span>
           </Link>
