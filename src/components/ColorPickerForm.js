@@ -67,6 +67,7 @@ class ColorPickerForm extends Component {
           ref="form"
           onSubmit={this.handleSubmit}
           onError={errors => console.log(errors)}
+          instantValidate={false}
         >
           <TextValidator
             className={classes.colorNameInput}

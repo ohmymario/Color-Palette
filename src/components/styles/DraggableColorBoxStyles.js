@@ -1,4 +1,5 @@
 import sizes from './sizes';
+import chroma from 'chroma-js';
 
 const styles = {
   root: {
@@ -32,11 +33,10 @@ const styles = {
     width: '100%',
     letterSpacing: '1px',
     textTransform: 'uppercase',
-
+    color: props => chroma.contrast(props.color.color, "black") < 6 ? 'rgba(255,255,255,0.95)' : 'rgba(0,0,0,0.85)',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    color: 'rgba(0, 0, 0, 0.5)',
     fontSize: '12px',
   },
   deleteIcon: {

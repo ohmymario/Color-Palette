@@ -16,6 +16,8 @@ import PaletteFormNav from './PaletteFormNav';
 import DraggableColorList from './DraggableColorList';
 import styles from './styles/NewPaletteFormStyles';
 
+import seedColors from '../assets/seedColors';
+
 class NewPaletteForm extends Component {
   static defaultProps = {
     maxColors: 20,
@@ -23,7 +25,7 @@ class NewPaletteForm extends Component {
 
   state = {
     open: true,
-    colors: this.props.palettes[0].colors,
+    colors: seedColors[0].colors,
   };
 
   handleDrawerOpen = () => {
