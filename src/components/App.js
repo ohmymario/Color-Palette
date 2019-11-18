@@ -95,6 +95,14 @@ class App extends Component {
                   </Page>
                 )}
               />
+              {/* This will be the page to redirect when no other path matches */}
+              <Route
+                render={(routeProps) => (
+                  <Page>
+                    <PaletteList palettes={this.state.palettes} deletePalette={this.deletePalette} {...routeProps} />
+                  </Page>
+                )}
+              />
             </Switch>
             </CSSTransition>
           </TransitionGroup>
