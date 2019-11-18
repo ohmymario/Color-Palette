@@ -26,7 +26,7 @@ class NewPaletteForm extends Component {
   state = {
     open: true,
     colors: seedColors[0].colors,
-    backupColors: seedColors[Math.floor(Math.random() * 9) + 1].colors,
+    backupColors: seedColors[Math.floor(Math.random() * 8) + 1].colors,
   };
 
   handleDrawerOpen = () => {
