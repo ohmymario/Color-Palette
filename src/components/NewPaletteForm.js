@@ -26,6 +26,7 @@ class NewPaletteForm extends Component {
   state = {
     open: true,
     colors: seedColors[0].colors,
+    backupColors: seedColors[Math.floor(Math.random() * 9) + 1].colors,
   };
 
   handleDrawerOpen = () => {
@@ -79,12 +80,26 @@ class NewPaletteForm extends Component {
     });
   };
 
-  // Add Random color from Prexisting Colors
+  // Add Random color from Pre-Existing Colors
   addRandomColors = () => {
-    const allColors = this.props.palettes.map(p => p.colors).flat();
-    const random = allColors[Math.floor(Math.random() * allColors.length)];
+
+    const { colors, backupColors } = this.state;
+    const { palettes } = this.props;
+
+    // Use Backup colors if all palettes deleted
+    let allColors = palettes.map(p => p.colors).flat();
+    if (allColors.length === 0) allColors = backupColors;
+
+    let randomColor;
+    let isDuplicateColor = true;
+    while(isDuplicateColor) {
+      randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+      console.log(randomColor);
+      isDuplicateColor = colors.some(color => color.name === randomColor.name)
+    }
+
     this.setState({
-      colors: [...this.state.colors, random],
+      colors: [...colors, randomColor],
     });
   };
 
