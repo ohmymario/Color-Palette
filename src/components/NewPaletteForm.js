@@ -80,6 +80,10 @@ class NewPaletteForm extends Component {
     });
   };
 
+  duplicateChecker = (colors, randomColor) => {
+    return colors.some(color => color.name === randomColor.name)
+  }
+
   // Add Random color from Pre-Existing Colors
   addRandomColors = () => {
 
@@ -88,14 +92,22 @@ class NewPaletteForm extends Component {
 
     // Use Backup colors if all palettes deleted
     let allColors = palettes.map(p => p.colors).flat();
+    let isDuplicateColor = true;
     if (allColors.length === 0) allColors = backupColors;
 
-    let randomColor;
-    let isDuplicateColor = true;
+    // Function to retrieve random color
+    const randomPresetColor = () => {
+      return allColors[Math.floor(Math.random() * allColors.length)];
+    }
+    let randomColor = randomPresetColor()
+
+    // Find a new color if color already in state
     while(isDuplicateColor) {
-      randomColor = allColors[Math.floor(Math.random() * allColors.length)];
-      console.log(randomColor);
-      isDuplicateColor = colors.some(color => color.name === randomColor.name)
+      isDuplicateColor = this.duplicateChecker(colors, randomColor)
+      if (isDuplicateColor === true) {
+        randomColor = randomPresetColor()
+      }
+
     }
 
     this.setState({
