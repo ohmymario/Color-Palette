@@ -52,7 +52,7 @@ class PaletteMetaForm extends Component {
   render() {
 
     const { newPaletteName, stage } = this.state;
-    const { handleSubmit, palettes, hideForm } = this.props;
+    const { hideForm } = this.props;
 
     return (
 
